@@ -11,24 +11,31 @@ class CategoriesPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Catégorie: $category'),
       ),
-      body: ListView(
-        children: [
-          if (category == 'Livres')
-            BookItem(imagePath: 'assets/images/livres/allyourperfects.png', title: 'Livre 1'),
-          if (category == 'Films') // Ajoutez ici des éléments spécifiques aux films
-            Column(
-              children: [
-                BookItem(imagePath: 'assets/images/films/thehungergames.png', title: 'The Hunger Games'),
-                BookItem(imagePath: 'assets/images/films/catchingfire.png', title: 'Catching Fire'),
-                BookItem(imagePath: 'assets/images/films/mockingjay1.png', title: 'Mockingjay Pt.1'),
-                BookItem(imagePath: 'assets/images/films/mockingjay2.png', title: 'Mockingjay Pt.2'),
-              ],
-            ),
-          if (category != 'Livres' && category != 'Films')
-            Center(child: Text('Aucun élément trouvé pour la catégorie: $category')),
-        ],
-      ),
+      body: _buildBody(context),
     );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    if (category == 'Livres') {
+      return ListView(
+        children: [
+          BookItem(imagePath: 'assets/images/livres/allyourperfects.png', title: 'all your perfects'),
+          BookItem(imagePath: 'assets/images/livres/atoutjamais.png', title: 'a tout jamais'),
+          BookItem(imagePath: 'assets/images/livres/la-tresse.png', title: 'la tresse '),
+        ],
+      );
+    } else if (category == 'Films') {
+      return ListView(
+        children: [
+          BookItem(imagePath: 'assets/images/films/thehungergames.png', title: 'The Hunger Games'),
+          BookItem(imagePath: 'assets/images/films/catchingfire.png', title: 'Catching Fire'),
+          BookItem(imagePath: 'assets/images/films/mockingjay1.png', title: 'Mockingjay Pt.1'),
+          BookItem(imagePath: 'assets/images/films/mockingjay2.png', title: 'Mockingjay Pt.2'),
+        ],
+      );
+    } else {
+      return Center(child: Text('Aucun élément trouvé pour la catégorie: $category'));
+    }
   }
 }
 
@@ -69,3 +76,5 @@ class _BookItemState extends State<BookItem> {
     );
   }
 }
+
+
