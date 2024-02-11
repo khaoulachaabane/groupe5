@@ -15,8 +15,15 @@ class CategoriesPage extends StatelessWidget {
         children: [
           if (category == 'Livres')
             BookItem(imagePath: 'assets/images/livres/allyourperfects.png', title: 'Livre 1'),
-          if (category == 'Films')
-            BookItem(imagePath: 'assets/images/films/thehungergames.png', title: 'The Hunger Games'),
+          if (category == 'Films') // Ajoutez ici des éléments spécifiques aux films
+            Column(
+              children: [
+                BookItem(imagePath: 'assets/images/films/thehungergames.png', title: 'The Hunger Games'),
+                BookItem(imagePath: 'assets/images/films/catchingfire.png', title: 'Catching Fire'),
+                BookItem(imagePath: 'assets/images/films/mockingjay1.png', title: 'Mockingjay Pt.1'),
+                BookItem(imagePath: 'assets/images/films/mockingjay2.png', title: 'Mockingjay Pt.2'),
+              ],
+            ),
           if (category != 'Livres' && category != 'Films')
             Center(child: Text('Aucun élément trouvé pour la catégorie: $category')),
         ],
