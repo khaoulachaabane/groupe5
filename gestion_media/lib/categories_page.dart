@@ -13,7 +13,9 @@ class CategoriesPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
+          BookItem(imagePath: 'assets/allyourperfects.png', title: 'Livre 1'),
           BookItem(imagePath: 'assets/livres/allyourperfects.png', title: 'Livre 1'),
+          
         ],
       ),
     );
@@ -33,27 +35,4 @@ class BookItem extends StatefulWidget {
 class _BookItemState extends State<BookItem> {
   bool liked = false;
 
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Image.asset(widget.imagePath),
-          ListTile(
-            title: Text(widget.title),
-            trailing: IconButton(
-              icon: Icon(liked ? Icons.favorite : Icons.favorite_border),
-              color: liked ? Colors.red : null,
-              onPressed: () {
-                setState(() {
-                  liked = !liked;
-                });
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+
