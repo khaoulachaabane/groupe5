@@ -14,7 +14,7 @@ class CategoriesPage extends StatelessWidget {
       body: ListView(
         children: [
           BookItem(imagePath: 'assets/images/livres/allyourperfects.png', title: 'Livre 1'),
-        ],
+        ],.
       ),
     );
   }
