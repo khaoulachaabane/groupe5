@@ -20,11 +20,11 @@ class HomePage extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('Bds'),
+            title: Text('Films'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CategoriesPage('Bds')),
+                MaterialPageRoute(builder: (context) => CategoriesPage('Films')),
               );
             },
             // Ajoutez des tuiles pour les autres catégories ici
@@ -34,3 +34,6 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+
+

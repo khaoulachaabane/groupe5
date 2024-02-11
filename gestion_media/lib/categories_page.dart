@@ -13,8 +13,13 @@ class CategoriesPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          BookItem(imagePath: 'assets/images/livres/allyourperfects.png', title: 'Livre 1'),
-        ],.
+          if (category == 'Livres')
+            BookItem(imagePath: 'assets/images/livres/allyourperfects.png', title: 'Livre 1'),
+          if (category == 'Films')
+            BookItem(imagePath: 'assets/images/films/thehungergames.png', title: 'The Hunger Games'),
+          if (category != 'Livres' && category != 'Films')
+            Center(child: Text('Aucun élément trouvé pour la catégorie: $category')),
+        ],
       ),
     );
   }
