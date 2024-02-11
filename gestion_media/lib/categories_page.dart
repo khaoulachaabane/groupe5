@@ -14,8 +14,8 @@ class CategoriesPage extends StatelessWidget {
       body: ListView(
         children: [
           // Image de livre avec bouton "J'aime"
-          BookItem(imagePath: 'assets/images/livres/livre1.jpg', title: 'Livre 1'),
-          BookItem(imagePath: 'assets/images/livres/livre2.jpg', title: 'Livre 2'),
+          BookItem(imagePath: 'assets/images/livres/allyourperfects.png', title: 'Livre 1'),
+          B//ookItem(imagePath: 'assets/images/livres/livre2.jpg', title: 'Livre 2'),
           // Ajoutez d'autres livres ici
         ],
       ),
