@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart'; // Importez la classe HomePage depuis le fichier correspondant.
 
-void main() {
-  runApp(MyApp());
-}
+class CategoriesPage extends StatelessWidget {
+  final String category;
 
-class MyApp extends StatelessWidget {
+  CategoriesPage(this.category);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Gestion de Médias',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    // Logique de construction de la page des catégories
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Catégorie: $category'),
       ),
-      home: HomePage(),
+      body: Center(
+        child: Text('Contenu de la catégorie: $category'),
+      ),
     );
   }
 }

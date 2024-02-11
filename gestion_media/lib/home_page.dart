@@ -27,8 +27,8 @@ class HomePage extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => CategoriesPage('Bds')),
               );
             },
+            // Ajoutez des tuiles pour les autres catégories ici
           ),
-          // Ajoutez des tuiles pour les autres catégories ici
         ],
       ),
     );
