@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'books_details_page.dart';
-import 'films_details_page.dart';  // Ajout de l'import pour la page des détails des films
+import 'films_details_page.dart'; 
 
 class CategoriesPage extends StatelessWidget {
   final String category;
@@ -98,6 +98,8 @@ class _BookItemState extends State<BookItem> {
               builder: (context) => BookDetailsPage(
                 title: widget.title,
                 description: widget.description,
+                // Ajout de l'image à passer à la page des détails
+                imageAssetPath: widget.imagePath,
               ),
             ),
           );
