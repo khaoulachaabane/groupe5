@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'books_details_page.dart';
+import 'films_details_page.dart';  // Ajout de l'import pour la page des détails des films
 
 class CategoriesPage extends StatelessWidget {
   final String category;
@@ -35,22 +36,22 @@ class CategoriesPage extends StatelessWidget {
           if (category == 'Films')
             Column(
               children: [
-                BookItem(
+                FilmItem(
                   imagePath: 'assets/images/films/thehungergames.png',
                   title: 'The Hunger Games',
                   description: 'Description de The Hunger Games...',
                 ),
-                BookItem(
+                FilmItem(
                   imagePath: 'assets/images/films/catchingfire.png',
                   title: 'Catching Fire',
                   description: 'Description de Catching Fire...',
                 ),
-                BookItem(
+                FilmItem(
                   imagePath: 'assets/images/films/mockingjay1.png',
                   title: 'Mockingjay Pt.1',
                   description: 'Description de Mockingjay Pt.1...',
                 ),
-                BookItem(
+                FilmItem(
                   imagePath: 'assets/images/films/mockingjay2.png',
                   title: 'Mockingjay Pt.2',
                   description: 'Description de Mockingjay Pt.2...',
@@ -95,6 +96,62 @@ class _BookItemState extends State<BookItem> {
             context,
             MaterialPageRoute(
               builder: (context) => BookDetailsPage(
+                title: widget.title,
+                description: widget.description,
+              ),
+            ),
+          );
+        },
+        child: Column(
+          children: [
+            Image.asset(widget.imagePath),
+            ListTile(
+              title: Text(widget.title),
+              trailing: IconButton(
+                icon: Icon(liked ? Icons.favorite : Icons.favorite_border),
+                color: liked ? Colors.red : null,
+                onPressed: () {
+                  setState(() {
+                    liked = !liked;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FilmItem extends StatefulWidget {
+  final String imagePath;
+  final String title;
+  final String description;
+
+  const FilmItem({
+    required this.imagePath,
+    required this.title,
+    required this.description,
+  });
+
+  @override
+  _FilmItemState createState() => _FilmItemState();
+}
+
+class _FilmItemState extends State<FilmItem> {
+  bool liked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FilmDetailsPage(
                 title: widget.title,
                 description: widget.description,
               ),
