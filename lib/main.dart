@@ -3,32 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class Tile {
-  String imageURL;
-  Alignment alignment;
-
-  Tile({required this.imageURL, required this.alignment});
-
-  Widget croppedImageTile() {
-    return FittedBox(
-      fit: BoxFit.fill,
-      child: ClipRect(
-        child: Container(
-          child: Align(
-            alignment: this.alignment,
-            widthFactor: 0.3,
-            heightFactor: 0.3,
-            child: Image.network(this.imageURL),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-Tile tile = Tile(
-    imageURL: 'https://picsum.photos/512', alignment: Alignment(0, 0));
-
 void main() {
   runApp(MyApp());
 }
@@ -383,7 +357,10 @@ class DisplayTileWidget extends StatelessWidget {
             height: 150.0,
             child: Container(
               margin: EdgeInsets.all(20.0),
-              child: tile.croppedImageTile(),
+              child: Image.network(
+                'https://picsum.photos/512',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Container(
@@ -440,7 +417,7 @@ class Exercise5PartB extends StatelessWidget {
               border: Border.all(color: Colors.black),
             ),
             child: Image.network(
-              'https://picsum.photos/200',
+              'https://picsum.photos/512',
               fit: BoxFit.cover,
             ),
           ),
@@ -449,6 +426,7 @@ class Exercise5PartB extends StatelessWidget {
     );
   }
 }
+
 
 
 
