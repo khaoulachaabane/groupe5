@@ -10,7 +10,7 @@ class Tile {
   Tile({required this.imageURL, required this.alignment});
 
   Widget croppedImageTile() {
-    return FittedBox(
+    return FittedBo
       fit: BoxFit.fill,
       child: ClipRect(
         child: Container(
@@ -166,7 +166,7 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
               margin: EdgeInsets.all(20.0),
               child: Transform(
                 transform: Matrix4.identity()
-                  ..rotateX(_rotationX)
+                  ..rotate_rotationX)
                   ..rotateY(_rotationY)
                   ..scale(_scaleFactor)
                   ..scale(_isMirrored ? -1.0 : 1.0),
@@ -179,7 +179,7 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBoheight: 10),
           Text('Rotation X: ${_rotationX.toStringAsFixed(2)}'),
           Slider(
             value: _rotationX,
@@ -298,7 +298,7 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
               margin: EdgeInsets.all(20.0),
               child: Transform(
                 transform: Matrix4.identity()
-                  ..rotateX(_rotationX)
+                  ..rotate_rotationX)
                   ..rotateY(_rotationY)
                   ..scale(_scaleFactor)
                   ..translate(_isMirrored ? 200.0 : 0.0),
@@ -315,12 +315,12 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
             onPressed: toggleAnimation,
             child: Text(_isAnimating ? 'Stop Animation' : 'Start Animation'),
           ),
-          SizedBox(height: 10),
+          SizedBoheight: 10),
           ElevatedButton(
             onPressed: toggleMirrorEffect,
             child: Text(_isMirrored ? 'Disable Mirror' : 'Enable Mirror'),
           ),
-          SizedBox(height: 10),
+          SizedBoheight: 10),
           Text('Rotation X: ${_rotationX.toStringAsFixed(2)}'),
           Slider(
             value: _rotationX,
@@ -378,7 +378,7 @@ class DisplayTileWidget extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          SizedBox(
+          SizedBo
             width: 150.0,
             height: 150.0,
             child: Container(
@@ -399,11 +399,24 @@ class DisplayTileWidget extends StatelessWidget {
 class Exercice5PartieA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Image.network(
-        'https://picsum.photos/512/512',
-        width: 200.0,
-        height: 200.0,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Exercice 5 - Partie A'),
+      ),
+      body: GridView.count(
+        crossAxisCount: 3,
+        children: List.generate(9, (index) {
+          return Container(
+            margin: EdgeInsets.all(8),
+            color: Colors.blueGrey,
+            child: Center(
+              child: Text(
+                'Tile $index',
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+            ),
+          );
+        }),
       ),
     );
   }
@@ -416,17 +429,17 @@ class Exercice5PartieB extends StatelessWidget {
       appBar: AppBar(
         title: Text('Exercice 5 - Partie B'),
       ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-        ),
-        itemCount: 9,
-        itemBuilder: (BuildContext context, int index) {
-          return Image.network(
-            'https://picsum.photos/512',
-            fit: BoxFit.cover,
+      body: GridView.count(
+        crossAxisCount: 3,
+        children: List.generate(9, (index) {
+          return Container(
+            margin: EdgeInsets.all(8),
+            child: Image.network(
+              'https://picsum.photos/512',
+              fit: BoxFit.cover,
+            ),
           );
-        },
+        }),
       ),
     );
   }
