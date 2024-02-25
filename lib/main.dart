@@ -26,7 +26,8 @@ class Tile {
   }
 }
 
-Tile tile = Tile(imageURL: 'https://picsum.photos/512', alignment: Alignment(0, 0));
+Tile tile = Tile(
+    imageURL: 'https://picsum.photos/512', alignment: Alignment(0, 0));
 
 void main() {
   runApp(MyApp());
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Transformation d\'image'),
+          title: Text('Exercises'),
         ),
         body: Menu(),
       ),
@@ -53,55 +54,66 @@ class Menu extends StatelessWidget {
       children: [
         Card(
           child: ListTile(
-            title: Text('Exercice 1'),
+            title: Text('Exercise 1'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Exercice1()),
+                MaterialPageRoute(builder: (context) => Exercise1()),
               );
             },
           ),
         ),
         Card(
           child: ListTile(
-            title: Text('Exercice 2 - Partie A'),
+            title: Text('Exercise 2 - Part A'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Exercice2PartieA()),
+                MaterialPageRoute(builder: (context) => Exercise2PartA()),
               );
             },
           ),
         ),
         Card(
           child: ListTile(
-            title: Text('Exercice 2 - Partie B'),
+            title: Text('Exercise 2 - Part B'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Exercice2PartieB()),
+                MaterialPageRoute(builder: (context) => Exercise2PartB()),
               );
             },
           ),
         ),
         Card(
           child: ListTile(
-            title: Text('Exercice 4'),
+            title: Text('Exercise 4'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Exercice4()),
+                MaterialPageRoute(builder: (context) => Exercise4()),
               );
             },
           ),
         ),
         Card(
           child: ListTile(
-            title: Text('Exercice 5 Partie A'),
+            title: Text('Exercise 5 - Part A'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Exercice5PartieA()),
+                MaterialPageRoute(builder: (context) => Exercise5PartA()),
+              );
+            },
+          ),
+        ),
+        Card(
+          child: ListTile(
+            title: Text('Exercise 5 - Part B'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Exercise5PartB()),
               );
             },
           ),
@@ -111,12 +123,12 @@ class Menu extends StatelessWidget {
   }
 }
 
-class Exercice1 extends StatelessWidget {
+class Exercise1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Image.network(
-        tile.imageURL,
+        'https://picsum.photos/512/512',
         width: 200.0,
         height: 200.0,
       ),
@@ -124,12 +136,12 @@ class Exercice1 extends StatelessWidget {
   }
 }
 
-class Exercice2PartieA extends StatefulWidget {
+class Exercise2PartA extends StatefulWidget {
   @override
-  _Exercice2PartieAState createState() => _Exercice2PartieAState();
+  _Exercise2PartAState createState() => _Exercise2PartAState();
 }
 
-class _Exercice2PartieAState extends State<Exercice2PartieA> {
+class _Exercise2PartAState extends State<Exercise2PartA> {
   double _rotationX = 0.0;
   double _rotationY = 0.0;
   double _scaleFactor = 1.0;
@@ -139,7 +151,7 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Exercice 2 Partie A'),
+        title: Text('Exercise 2 Part A'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -160,7 +172,7 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
                   ..scale(_isMirrored ? -1.0 : 1.0),
                 alignment: FractionalOffset.center,
                 child: Image.network(
-                  tile.imageURL,
+                  'https://picsum.photos/512/512',
                   width: 200.0,
                   height: 200.0,
                 ),
@@ -207,12 +219,12 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
   }
 }
 
-class Exercice2PartieB extends StatefulWidget {
+class Exercise2PartB extends StatefulWidget {
   @override
-  _Exercice2PartieBState createState() => _Exercice2PartieBState();
+  _Exercise2PartBState createState() => _Exercise2PartBState();
 }
 
-class _Exercice2PartieBState extends State<Exercice2PartieB> {
+class _Exercise2PartBState extends State<Exercise2PartB> {
   double _rotationX = 0.0;
   double _rotationY = 0.0;
   double _scaleFactor = 1.0;
@@ -275,7 +287,7 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Exercice 2 Partie B'),
+        title: Text('Exercise 2 Part B'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -292,7 +304,7 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
                   ..translate(_isMirrored ? 200.0 : 0.0),
                 alignment: FractionalOffset.center,
                 child: Image.network(
-                  tile.imageURL,
+                  'https://picsum.photos/512/512',
                   width: 200.0,
                   height: 200.0,
                 ),
@@ -348,12 +360,12 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
   }
 }
 
-class Exercice4 extends StatelessWidget {
+class Exercise4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Exercice 4'),
+        title: Text('Exercise 4'),
       ),
       body: DisplayTileWidget(),
     );
@@ -376,7 +388,7 @@ class DisplayTileWidget extends StatelessWidget {
           ),
           Container(
             height: 200,
-            child: Image.network(tile.imageURL, fit: BoxFit.cover),
+            child: Image.network('https://picsum.photos/512', fit: BoxFit.cover),
           ),
         ],
       ),
@@ -384,31 +396,55 @@ class DisplayTileWidget extends StatelessWidget {
   }
 }
 
-class Exercice5PartieA extends StatelessWidget {
+class Exercise5PartA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Exercice 5 Partie A'),
+        title: Text('Exercise 5 Part A'),
       ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-        ),
-        itemCount: 9,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            color: Colors.blueGrey,
-            child: Center(
-              child: Image.network(
-                tile.imageURL,
-                fit: BoxFit.cover,
-              ),
+      body: GridView.count(
+        crossAxisCount: 3,
+        children: List.generate(
+          9,
+          (index) => Container(
+            margin: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
             ),
-          );
-        },
+            child: Image.network(
+              'https://picsum.photos/200',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Exercise5PartB extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Exercise 5 Part B'),
+      ),
+      body: GridView.count(
+        crossAxisCount: 3,
+        children: List.generate(
+          9,
+          (index) => Container(
+            margin: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+            ),
+            child: Image.network(
+              'https://picsum.photos/200',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
       ),
     );
   }
