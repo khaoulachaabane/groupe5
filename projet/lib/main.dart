@@ -10,7 +10,7 @@ class Tile {
   Tile({required this.imageURL, required this.alignment});
 
   Widget croppedImageTile() {
-    return FittedBo
+    return FittedBox(
       fit: BoxFit.fill,
       child: ClipRect(
         child: Container(
@@ -96,6 +96,28 @@ class Menu extends StatelessWidget {
             },
           ),
         ),
+        Card(
+          child: ListTile(
+            title: Text('Exercice 5 - Partie A'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Exercice5PartieA()),
+              );
+            },
+          ),
+        ),
+        Card(
+          child: ListTile(
+            title: Text('Exercice 5 - Partie B'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Exercice5PartieB()),
+              );
+            },
+          ),
+        ),
       ],
     );
   }
@@ -144,7 +166,7 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
               margin: EdgeInsets.all(20.0),
               child: Transform(
                 transform: Matrix4.identity()
-                  ..rotate_rotationX)
+                  ..rotateX(_rotationX)
                   ..rotateY(_rotationY)
                   ..scale(_scaleFactor)
                   ..scale(_isMirrored ? -1.0 : 1.0),
@@ -157,7 +179,7 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
               ),
             ),
           ),
-          SizedBoheight: 10),
+          SizedBox(height: 10),
           Text('Rotation X: ${_rotationX.toStringAsFixed(2)}'),
           Slider(
             value: _rotationX,
@@ -276,7 +298,7 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
               margin: EdgeInsets.all(20.0),
               child: Transform(
                 transform: Matrix4.identity()
-                  ..rotate_rotationX)
+                  ..rotateX(_rotationX)
                   ..rotateY(_rotationY)
                   ..scale(_scaleFactor)
                   ..translate(_isMirrored ? 200.0 : 0.0),
@@ -293,12 +315,12 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
             onPressed: toggleAnimation,
             child: Text(_isAnimating ? 'Stop Animation' : 'Start Animation'),
           ),
-          SizedBoheight: 10),
+          SizedBox(height: 10),
           ElevatedButton(
             onPressed: toggleMirrorEffect,
             child: Text(_isMirrored ? 'Disable Mirror' : 'Enable Mirror'),
           ),
-          SizedBoheight: 10),
+          SizedBox(height: 10),
           Text('Rotation X: ${_rotationX.toStringAsFixed(2)}'),
           Slider(
             value: _rotationX,
@@ -356,7 +378,7 @@ class DisplayTileWidget extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          SizedBo
+          SizedBox(
             width: 150.0,
             height: 150.0,
             child: Container(
@@ -373,3 +395,40 @@ class DisplayTileWidget extends StatelessWidget {
     );
   }
 }
+
+class Exercice5PartieA extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Image.network(
+        'https://picsum.photos/512/512',
+        width: 200.0,
+        height: 200.0,
+      ),
+    );
+  }
+}
+
+class Exercice5PartieB extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Exercice 5 - Partie B'),
+      ),
+      body: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+        ),
+        itemCount: 9,
+        itemBuilder: (BuildContext context, int index) {
+          return Image.network(
+            'https://picsum.photos/512',
+            fit: BoxFit.cover,
+          );
+        },
+      ),
+    );
+  }
+}
+
