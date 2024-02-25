@@ -1,6 +1,33 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
+
+import 'package:flutter/material.dart';
+
+class Tile {
+  String imageURL;
+  Alignment alignment;
+
+  Tile({required this.imageURL, required this.alignment});
+
+  Widget croppedImageTile() {
+    return FittedBo
+      fit: BoxFit.fill,
+      child: ClipRect(
+        child: Container(
+          child: Align(
+            alignment: this.alignment,
+            widthFactor: 0.3,
+            heightFactor: 0.3,
+            child: Image.network(this.imageURL),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+Tile tile = Tile(
+    imageURL: 'https://picsum.photos/512', alignment: Alignment(0, 0));
 
 void main() {
   runApp(MyApp());
@@ -58,6 +85,17 @@ class Menu extends StatelessWidget {
             },
           ),
         ),
+        Card(
+          child: ListTile(
+            title: Text('Exercice 4'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Exercice4()),
+              );
+            },
+          ),
+        ),
       ],
     );
   }
@@ -106,7 +144,7 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
               margin: EdgeInsets.all(20.0),
               child: Transform(
                 transform: Matrix4.identity()
-                  ..rotateX(_rotationX)
+                  ..rotate_rotationX)
                   ..rotateY(_rotationY)
                   ..scale(_scaleFactor)
                   ..scale(_isMirrored ? -1.0 : 1.0),
@@ -119,7 +157,7 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBoheight: 10),
           Text('Rotation X: ${_rotationX.toStringAsFixed(2)}'),
           Slider(
             value: _rotationX,
@@ -170,7 +208,7 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
   double _scaleFactor = 1.0;
   bool _isAnimating = true;
   bool _isMirrored = false;
-  Timer? _timer;
+  late Timer _timer;
 
   @override
   void initState() {
@@ -180,7 +218,7 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
 
   @override
   void dispose() {
-    _timer?.cancel();
+    _timer.cancel();
     super.dispose();
   }
 
@@ -190,7 +228,7 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
   }
 
   void stopAnimation() {
-    _timer?.cancel();
+    _timer.cancel();
     setState(() {
       _isAnimating = false;
     });
@@ -238,7 +276,7 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
               margin: EdgeInsets.all(20.0),
               child: Transform(
                 transform: Matrix4.identity()
-                  ..rotateX(_rotationX)
+                  ..rotate_rotationX)
                   ..rotateY(_rotationY)
                   ..scale(_scaleFactor)
                   ..translate(_isMirrored ? 200.0 : 0.0),
@@ -255,12 +293,12 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
             onPressed: toggleAnimation,
             child: Text(_isAnimating ? 'Stop Animation' : 'Start Animation'),
           ),
-          SizedBox(height: 10),
+          SizedBoheight: 10),
           ElevatedButton(
             onPressed: toggleMirrorEffect,
             child: Text(_isMirrored ? 'Disable Mirror' : 'Enable Mirror'),
           ),
-          SizedBox(height: 10),
+          SizedBoheight: 10),
           Text('Rotation X: ${_rotationX.toStringAsFixed(2)}'),
           Slider(
             value: _rotationX,
@@ -293,6 +331,42 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
                 _scaleFactor = value;
               });
             },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Exercice4 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Exercice 4'),
+      ),
+      body: DisplayTileWidget(),
+    );
+  }
+}
+
+class DisplayTileWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          SizedBo
+            width: 150.0,
+            height: 150.0,
+            child: Container(
+              margin: EdgeInsets.all(20.0),
+              child: tile.croppedImageTile(),
+            ),
+          ),
+          Container(
+            height: 200,
+            child: Image.network('https://picsum.photos/512', fit: BoxFit.cover),
           ),
         ],
       ),

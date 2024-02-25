@@ -17,3 +17,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// Ajout d'une liste pour stocker les films préférés
+List<String> favoriteFilms = [];

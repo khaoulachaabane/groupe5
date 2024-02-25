@@ -6,54 +6,54 @@ class FilmDetailsPage extends StatelessWidget {
 
   FilmDetailsPage({required this.title, required this.description});
 
+  // Liste des films avec leurs détails
+  List<Map<String, String>> films = [
+    {
+      'title': 'The Hunger Games',
+      'description': 'Description de The Hunger Games',
+      'author': 'Suzanne Collins',
+      'country': 'États-Unis',
+      'genre': 'Science-fiction, Dystopie',
+      'language': 'Anglais',
+      'releaseDate': '2012',
+      'location': 'Panem',
+    },
+    {
+      'title': 'Catching Fire',
+      'description': 'Description de Catching Fire',
+      'author': 'Suzanne Collins',
+      'country': 'États-Unis',
+      'genre': 'Science-fiction, Dystopie',
+      'language': 'Anglais',
+      'releaseDate': '2013',
+      'location': 'Panem',
+    },
+    {
+      'title': 'Mockingjay Pt.1',
+      'description': 'Description de Mockingjay Pt.1',
+      'author': 'Suzanne Collins',
+      'country': 'États-Unis',
+      'genre': 'Science-fiction, Dystopie',
+      'language': 'Anglais',
+      'releaseDate': '2014',
+      'location': 'District 13',
+    },
+    {
+      'title': 'Mockingjay Pt.2',
+      'description': 'Description de Mockingjay Pt.2',
+      'author': 'Suzanne Collins',
+      'country': 'États-Unis',
+      'genre': 'Science-fiction, Dystopie',
+      'language': 'Anglais',
+      'releaseDate': '2015',
+      'location': 'Capitole',
+    },
+    // Ajoutez les détails des deux autres films de la même manière
+    // ...
+  ];
+
   @override
   Widget build(BuildContext context) {
-    // Liste des films avec leurs détails
-    List<Map<String, String>> films = [
-      {
-        'title': 'The Hunger Games',
-        'description': 'Description de The Hunger Games',
-        'author': 'Suzanne Collins',
-        'country': 'États-Unis',
-        'genre': 'Science-fiction, Dystopie',
-        'language': 'Anglais',
-        'releaseDate': '2012',
-        'location': 'Panem',
-      },
-      {
-        'title': 'Catching Fire',
-        'description': 'Description de Catching Fire',
-        'author': 'Suzanne Collins',
-        'country': 'États-Unis',
-        'genre': 'Science-fiction, Dystopie',
-        'language': 'Anglais',
-        'releaseDate': '2013',
-        'location': 'Panem',
-      },
-      {
-        'title': 'Mockingjay Pt.1',
-        'description': 'Description de MOckingjay Pt.1',
-        'author': 'Suzanne Collins',
-        'country': 'États-Unis',
-        'genre': 'Science-fiction, Dystopie',
-        'language': 'Anglais',
-        'releaseDate': '2014',
-        'location': 'District 13',
-      },
-      {
-        'title': 'Mockingjay Pt.1',
-        'description': 'Description de MOckingjay Pt.1',
-        'author': 'Suzanne Collins',
-        'country': 'États-Unis',
-        'genre': 'Science-fiction, Dystopie',
-        'language': 'Anglais',
-        'releaseDate': '2015',
-        'location': 'Capitole',
-      },
-      // Ajoutez les détails des deux autres films de la même manière
-      // ...
-    ];
-
     // Trouvez les détails du film actuel dans la liste
     Map<String, String>? currentFilm;
     for (var film in films) {
