@@ -4,21 +4,19 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class Tile {
-  String imageURL;
-  Alignment alignment;
+  static const String imageURL = 'https://picsum.photos/512';
+  static Alignment alignment = Alignment(0, 0);
 
-  Tile({required this.imageURL, required this.alignment});
-
-  Widget croppedImageTile() {
-    return FittedBo
+  static Widget croppedImageTile() {
+    return FittedBox(
       fit: BoxFit.fill,
       child: ClipRect(
         child: Container(
           child: Align(
-            alignment: this.alignment,
+            alignment: Tile.alignment,
             widthFactor: 0.3,
             heightFactor: 0.3,
-            child: Image.network(this.imageURL),
+            child: Image.network(Tile.imageURL),
           ),
         ),
       ),
@@ -26,8 +24,29 @@ class Tile {
   }
 }
 
-Tile tile = Tile(
-    imageURL: 'https://picsum.photos/512', alignment: Alignment(0, 0));
+class DisplayTileWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          SizedBox(
+            width: 150.0,
+            height: 150.0,
+            child: Container(
+              margin: EdgeInsets.all(20.0),
+              child: Tile.croppedImageTile(),
+            ),
+          ),
+          Container(
+            height: 200,
+            child: Image.network(Tile.imageURL, fit: BoxFit.cover),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 void main() {
   runApp(MyApp());
@@ -128,7 +147,7 @@ class Exercice1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Image.network(
-        'https://picsum.photos/512/512',
+        Tile.imageURL,
         width: 200.0,
         height: 200.0,
       ),
@@ -166,20 +185,20 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
               margin: EdgeInsets.all(20.0),
               child: Transform(
                 transform: Matrix4.identity()
-                  ..rotate_rotationX)
+                  ..rotateX(_rotationX)
                   ..rotateY(_rotationY)
                   ..scale(_scaleFactor)
                   ..scale(_isMirrored ? -1.0 : 1.0),
                 alignment: FractionalOffset.center,
                 child: Image.network(
-                  'https://picsum.photos/512/512',
+                  Tile.imageURL,
                   width: 200.0,
                   height: 200.0,
                 ),
               ),
             ),
           ),
-          SizedBoheight: 10),
+          SizedBox(height: 10),
           Text('Rotation X: ${_rotationX.toStringAsFixed(2)}'),
           Slider(
             value: _rotationX,
@@ -298,13 +317,13 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
               margin: EdgeInsets.all(20.0),
               child: Transform(
                 transform: Matrix4.identity()
-                  ..rotate_rotationX)
+                  ..rotateX(_rotationX)
                   ..rotateY(_rotationY)
                   ..scale(_scaleFactor)
                   ..translate(_isMirrored ? 200.0 : 0.0),
                 alignment: FractionalOffset.center,
                 child: Image.network(
-                  'https://picsum.photos/512/512',
+                  Tile.imageURL,
                   width: 200.0,
                   height: 200.0,
                 ),
@@ -315,12 +334,12 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
             onPressed: toggleAnimation,
             child: Text(_isAnimating ? 'Stop Animation' : 'Start Animation'),
           ),
-          SizedBoheight: 10),
+          SizedBox(height: 10),
           ElevatedButton(
             onPressed: toggleMirrorEffect,
             child: Text(_isMirrored ? 'Disable Mirror' : 'Enable Mirror'),
           ),
-          SizedBoheight: 10),
+          SizedBox(height: 10),
           Text('Rotation X: ${_rotationX.toStringAsFixed(2)}'),
           Slider(
             value: _rotationX,
@@ -372,30 +391,6 @@ class Exercice4 extends StatelessWidget {
   }
 }
 
-class DisplayTileWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          SizedBo
-            width: 150.0,
-            height: 150.0,
-            child: Container(
-              margin: EdgeInsets.all(20.0),
-              child: tile.croppedImageTile(),
-            ),
-          ),
-          Container(
-            height: 200,
-            child: Image.network('https://picsum.photos/512', fit: BoxFit.cover),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class Exercice5PartieA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -435,7 +430,7 @@ class Exercice5PartieB extends StatelessWidget {
           return Container(
             margin: EdgeInsets.all(8),
             child: Image.network(
-              'https://picsum.photos/512',
+              Tile.imageURL,
               fit: BoxFit.cover,
             ),
           );
@@ -444,4 +439,13 @@ class Exercice5PartieB extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
 
