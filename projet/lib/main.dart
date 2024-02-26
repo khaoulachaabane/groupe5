@@ -1,52 +1,6 @@
+import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
-
-import 'package:flutter/material.dart';
-
-class Tile {
-  static const String imageURL = 'https://picsum.photos/512';
-  static Alignment alignment = Alignment(0, 0);
-
-  static Widget croppedImageTile() {
-    return FittedBox(
-      fit: BoxFit.fill,
-      child: ClipRect(
-        child: Container(
-          child: Align(
-            alignment: Tile.alignment,
-            widthFactor: 0.3,
-            heightFactor: 0.3,
-            child: Image.network(Tile.imageURL),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class DisplayTileWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          SizedBox(
-            width: 150.0,
-            height: 150.0,
-            child: Container(
-              margin: EdgeInsets.all(20.0),
-              child: Tile.croppedImageTile(),
-            ),
-          ),
-          Container(
-            height: 200,
-            child: Image.network(Tile.imageURL, fit: BoxFit.cover),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 void main() {
   runApp(MyApp());
@@ -147,7 +101,7 @@ class Exercice1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Image.network(
-        Tile.imageURL,
+        'https://picsum.photos/512',
         width: 200.0,
         height: 200.0,
       ),
@@ -191,7 +145,7 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
                   ..scale(_isMirrored ? -1.0 : 1.0),
                 alignment: FractionalOffset.center,
                 child: Image.network(
-                  Tile.imageURL,
+                  'https://picsum.photos/512',
                   width: 200.0,
                   height: 200.0,
                 ),
@@ -323,7 +277,7 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
                   ..translate(_isMirrored ? 200.0 : 0.0),
                 alignment: FractionalOffset.center,
                 child: Image.network(
-                  Tile.imageURL,
+                  'https://picsum.photos/512',
                   width: 200.0,
                   height: 200.0,
                 ),
@@ -426,17 +380,52 @@ class Exercice5PartieB extends StatelessWidget {
       ),
       body: GridView.count(
         crossAxisCount: 3,
-        children: List.generate(9, (index) {
-          return Container(
-            margin: EdgeInsets.all(8),
-            child: Image.network(
-              Tile.imageURL,
-              fit: BoxFit.cover,
-            ),
-          );
-        }),
+        children: _buildPuzzlePieces(),
       ),
     );
+  }
+
+  List<Widget> _buildPuzzlePieces() {
+    final List<Widget> pieces = [];
+    final String imageURL = 'https://picsum.photos/512';
+    final double imageSize = 512.0; // Taille de l'image
+    final double pieceSize = imageSize / 3; // Taille d'une pièce de puzzle
+
+    // Coordonnées des morceaux par rapport au centre (0, 0)
+    final List<Offset> offsets = [
+      Offset(-1, -1), Offset(0, -1), Offset(1, -1),
+      Offset(-1, 0), Offset(0, 0), Offset(1, 0),
+      Offset(-1, 1), Offset(0, 1), Offset(1, 1),
+    ];
+
+    for (int i = 0; i < 9; i++) {
+      final int row = i ~/ 3;
+      final int col = i % 3;
+
+      final double offsetX = col * pieceSize;
+      final double offsetY = row * pieceSize;
+
+      final Widget piece = Container(
+        margin: EdgeInsets.all(8),
+        child: ClipRect(
+          child: Align(
+            alignment: Alignment(-offsets[i].dx, -offsets[i].dy),
+            widthFactor: 1 / 3,
+            heightFactor: 1 / 3,
+            child: Image.network(
+              imageURL,
+              fit: BoxFit.cover,
+              width: pieceSize,
+              height: pieceSize,
+            ),
+          ),
+        ),
+      );
+
+      pieces.add(piece);
+    }
+
+    return pieces;
   }
 }
 
@@ -444,8 +433,48 @@ class Exercice5PartieB extends StatelessWidget {
 
 
 
+class DisplayTileWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          SizedBox(
+            width: 150.0,
+            height: 150.0,
+            child: Container(
+              margin: EdgeInsets.all(20.0),
+              child: Tile.croppedImageTile(),
+            ),
+          ),
+          Container(
+            height: 200,
+            child: Image.network(Tile.imageURL, fit: BoxFit.cover),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
+class Tile {
+  static String imageURL = 'https://picsum.photos/512';
+  static Alignment alignment = Alignment(0, 0);
 
-
-
+  static Widget croppedImageTile() {
+    return FittedBox(
+      fit: BoxFit.fill,
+      child: ClipRect(
+        child: Container(
+          child: Align(
+            alignment: Tile.alignment,
+            widthFactor: 0.3,
+            heightFactor: 0.3,
+            child: Image.network(Tile.imageURL),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
