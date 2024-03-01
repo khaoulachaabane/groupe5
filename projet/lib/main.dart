@@ -1,52 +1,7 @@
+import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/material.dart';
-
-class Tile {
-  static const String imageURL = 'https://picsum.photos/512';
-  static Alignment alignment = Alignment(0, 0);
-
-  static Widget croppedImageTile() {
-    return FittedBox(
-      fit: BoxFit.fill,
-      child: ClipRect(
-        child: Container(
-          child: Align(
-            alignment: Tile.alignment,
-            widthFactor: 0.3,
-            heightFactor: 0.3,
-            child: Image.network(Tile.imageURL),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class DisplayTileWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          SizedBox(
-            width: 150.0,
-            height: 150.0,
-            child: Container(
-              margin: EdgeInsets.all(20.0),
-              child: Tile.croppedImageTile(),
-            ),
-          ),
-          Container(
-            height: 200,
-            child: Image.network(Tile.imageURL, fit: BoxFit.cover),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 void main() {
   runApp(MyApp());
@@ -61,6 +16,57 @@ class MyApp extends StatelessWidget {
           title: Text('Transformation d\'image'),
         ),
         body: Menu(),
+      ),
+    );
+  }
+}
+
+class Tile {
+  String imageURL;
+  Alignment alignment;
+
+  Tile(this.imageURL, this.alignment);
+
+  Widget croppedImageTile() {
+    return FittedBox(
+      fit: BoxFit.fill,
+      child: ClipRect(
+        child: Container(
+          child: Align(
+            alignment: alignment,
+            widthFactor: 0.3,
+            heightFactor: 0.3,
+            child: Image.network(imageURL),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class DisplayTileWidget extends StatelessWidget {
+  final Tile tile;
+
+  DisplayTileWidget(this.tile);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          SizedBox(
+            width: 150.0,
+            height: 150.0,
+            child: Container(
+              margin: EdgeInsets.all(20.0),
+              child: tile.croppedImageTile(),
+            ),
+          ),
+          Container(
+            height: 200,
+            child: Image.network(tile.imageURL, fit: BoxFit.cover),
+          ),
+        ],
       ),
     );
   }
@@ -137,17 +143,29 @@ class Menu extends StatelessWidget {
             },
           ),
         ),
+        Card(
+          child: ListTile(
+            title: Text('Exercice 5 - Partie C'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Exercice5C()),
+              );
+            },
+          ),
+        ),
       ],
     );
   }
 }
+
 
 class Exercice1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Image.network(
-        Tile.imageURL,
+        'https://picsum.photos/512',
         width: 200.0,
         height: 200.0,
       ),
@@ -191,7 +209,7 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
                   ..scale(_isMirrored ? -1.0 : 1.0),
                 alignment: FractionalOffset.center,
                 child: Image.network(
-                  Tile.imageURL,
+                  'https://picsum.photos/513',
                   width: 200.0,
                   height: 200.0,
                 ),
@@ -202,8 +220,8 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
           Text('Rotation X: ${_rotationX.toStringAsFixed(2)}'),
           Slider(
             value: _rotationX,
-            min: -pi,
-            max: pi,
+            min: -3.14,
+            max: 3.14,
             onChanged: (value) {
               setState(() {
                 _rotationX = value;
@@ -213,8 +231,8 @@ class _Exercice2PartieAState extends State<Exercice2PartieA> {
           Text('Rotation Y: ${_rotationY.toStringAsFixed(2)}'),
           Slider(
             value: _rotationY,
-            min: -pi,
-            max: pi,
+            min: -3.14,
+            max: 3.14,
             onChanged: (value) {
               setState(() {
                 _rotationY = value;
@@ -290,8 +308,8 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
     setState(() {
       _rotationX += 0.05;
       _rotationY += 0.05;
-      if (_rotationX > pi) _rotationX -= 2 * pi;
-      if (_rotationY > pi) _rotationY -= 2 * pi;
+      if (_rotationX > 3.14) _rotationX -= 2 * 3.14;
+      if (_rotationY > 3.14) _rotationY -= 2 * 3.14;
       _scaleFactor = 0.5 + 0.5 * (1 + sin(_rotationX + _rotationY));
     });
   }
@@ -323,7 +341,7 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
                   ..translate(_isMirrored ? 200.0 : 0.0),
                 alignment: FractionalOffset.center,
                 child: Image.network(
-                  Tile.imageURL,
+                  'https://picsum.photos/514',
                   width: 200.0,
                   height: 200.0,
                 ),
@@ -343,8 +361,8 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
           Text('Rotation X: ${_rotationX.toStringAsFixed(2)}'),
           Slider(
             value: _rotationX,
-            min: -pi,
-            max: pi,
+            min: -3.14,
+            max: 3.14,
             onChanged: (value) {
               setState(() {
                 _rotationX = value;
@@ -354,8 +372,8 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
           Text('Rotation Y: ${_rotationY.toStringAsFixed(2)}'),
           Slider(
             value: _rotationY,
-            min: -pi,
-            max: pi,
+            min: -3.14,
+            max: 3.14,
             onChanged: (value) {
               setState(() {
                 _rotationY = value;
@@ -382,11 +400,18 @@ class _Exercice2PartieBState extends State<Exercice2PartieB> {
 class Exercice4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Créez une instance de Tile avec des valeurs d'exemple
+    final Tile exampleTile = Tile(
+      'https://picsum.photos/515',
+      Alignment(0, 0),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Exercice 4'),
       ),
-      body: DisplayTileWidget(),
+      // Fournissez l'instance de Tile à DisplayTileWidget
+      body: DisplayTileWidget(exampleTile),
     );
   }
 }
@@ -417,35 +442,163 @@ class Exercice5PartieA extends StatelessWidget {
   }
 }
 
-class Exercice5PartieB extends StatelessWidget {
+class Exercice5PartieB extends StatefulWidget {
+  const Exercice5PartieB({Key? key}) : super(key: key);
+
+  @override
+  _Exercice5PartieBState createState() => _Exercice5PartieBState();
+}
+
+class _Exercice5PartieBState extends State<Exercice5PartieB> {
+  int _crossAxisCount = 3; // Nombre initial de divisions
+  final String imageURL = 'https://picsum.photos/516'; // URL de l'image
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Exercice 5 - Partie B'),
+        title: const Text('Exercice 5 - Partie B'),
       ),
-      body: GridView.count(
-        crossAxisCount: 3,
-        children: List.generate(9, (index) {
-          return Container(
-            margin: EdgeInsets.all(8),
-            child: Image.network(
-              Tile.imageURL,
-              fit: BoxFit.cover,
+      body: Column(
+        children: [
+          Slider(
+            value: _crossAxisCount.toDouble(),
+            min: 3,
+            max: 10,
+            divisions: 7, // Nombre de divisions du curseur
+            label: _crossAxisCount.round().toString(),
+            onChanged: (value) {
+              setState(() {
+                _crossAxisCount = value.toInt();
+              });
+            },
+          ),
+          Expanded(
+            child: GridView.count(
+              primary: false,
+              padding: const EdgeInsets.all(10),
+              crossAxisSpacing: 2.0,
+              mainAxisSpacing: 2.0,
+              crossAxisCount: _crossAxisCount,
+              children: generateAllTiles(_crossAxisCount),
             ),
-          );
-        }),
+          ),
+        ],
       ),
     );
   }
+
+  List<Widget> generateAllTiles(int size) {
+    return List<Widget>.generate(size * size, (index) => createTileWidget(index));
+  }
+
+ Widget createTileWidget(int index) {
+  final double xOffset = (index % _crossAxisCount) / (_crossAxisCount - 1);
+  final double yOffset = (index ~/ _crossAxisCount) / (_crossAxisCount - 1);
+  final double xAlignment = (xOffset * 2 - 1).clamp(-1.0, 1.0);
+  final double yAlignment = (yOffset * 2 - 1).clamp(-1.0, 1.0);
+
+  return InkWell(
+    child: Container(
+      color: Colors.blue, // Couleur de fond de chaque conteneur
+      child: Center(
+        child: FittedBox(
+          fit: BoxFit.cover,
+          child: ClipRect(
+            child: Align(
+              alignment: Alignment(xAlignment, yAlignment),
+              widthFactor: 1.0 / _crossAxisCount,
+              heightFactor: 1.0 / _crossAxisCount,
+
+              child: Image.network(imageURL),
+            ),
+          ),
+        ),
+      ),
+    ),
+    onTap: () {
+      // Action à effectuer lorsque la tuile est tapée
+    },
+  );
+}
 }
 
+class Exercice5PartieC extends StatefulWidget {
+  @override
+  _Exercice5PartieCState createState() => _Exercice5PartieCState();
+}
 
+class _Exercice5PartieCState extends State<Exercice5PartieC> {
+  double _crossAxisCount = 3;
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Exercice 5 - Partie C'),
+      ),
+      body: Column(
+        children: [
+          Slider(
+            min: 3,
+            max: 10,
+            divisions: 7,
+            value: _crossAxisCount,
+            label: _crossAxisCount.toInt().toString(),
+            onChanged: (value) {
+              setState(() {
+                _crossAxisCount = value;
+              });
+            },
+          ),
+          Expanded(
+            child: GridView.count(
+              primary: false,
+              padding: const EdgeInsets.all(10),
+              crossAxisSpacing: 2.0,
+              mainAxisSpacing: 2.0,
+              crossAxisCount: _crossAxisCount.toInt(),
+              children: generateAllTiles(_crossAxisCount.toInt()),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
+  List<Widget> generateAllTiles(int size) {
+    return List<Widget>.generate(
+      size * size,
+      (index) => createTileWidget(index),
+    );
+  }
 
+  Widget createTileWidget(int index) {
+    final double xOffset = (index % _crossAxisCount) / (_crossAxisCount - 1);
+    final double yOffset = (index ~/ _crossAxisCount) / (_crossAxisCount - 1);
+    final double xAlignment = (xOffset * 2 - 1).clamp(-1.0, 1.0);
+    final double yAlignment = (yOffset * 2 - 1).clamp(-1.0, 1.0);
 
-
-
-
-
+    return InkWell(
+      child: Container(
+        color: Colors.blue, // Couleur de fond de chaque conteneur
+        child: Center(
+          child: FittedBox(
+            fit: BoxFit.cover,
+            child: ClipRect(
+              child: Align(
+                alignment: Alignment(xAlignment, yAlignment),
+                widthFactor: 1.0 / _crossAxisCount,
+                heightFactor: 1.0 / _crossAxisCount,
+                child: Image.network('https://picsum.photos/512'),
+              ),
+            ),
+          ),
+        ),
+      ),
+      onTap: () {
+        // Action à effectuer lorsque la tuile est tapée
+      },
+    );
+  }
+}
