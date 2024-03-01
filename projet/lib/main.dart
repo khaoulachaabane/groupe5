@@ -149,7 +149,7 @@ class Menu extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Exercice5C()),
+                MaterialPageRoute(builder: (context) => Exercice5PartieC()),
               );
             },
           ),
